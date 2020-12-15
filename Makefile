@@ -1,4 +1,4 @@
-# Copyright 2019 Cartesi Pte. Ltd.
+# Copyright 2020 Cartesi Pte. Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -13,13 +13,13 @@
 #
 .PHONY: build run push
 
-IMG := cartesi/playground
+TAG := cartesi/playground
 
 build:
-	docker build -t $(IMG) .
+	docker build -t $(TAG) .
 
 push:
-	docker push $(IMG)
+	docker push $(TAG)
 
 run:
 	@docker run \
@@ -31,5 +31,5 @@ run:
 		 -it \
 		 -h playground \
 		 -w /home/$$(id -u -n) \
-		 --rm $(IMG) /bin/bash
+		 --rm $(TAG) /bin/bash
 
