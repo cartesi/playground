@@ -38,7 +38,6 @@ The following options are available as `make` targets:
 You can pass the following variables to the make target if you wish to use different docker image tags.
 
 - TAG: playground image tag
-- TOOLCHAIN\_TAG: toolchain image tag
 
 ```
 $ make build TAG=mytag
