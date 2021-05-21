@@ -29,7 +29,7 @@ WORKDIR /opt/cartesi
 
 # Setup su-exec
 COPY --from=cartesi/toolchain:0.5.0 /usr/local/bin/su-exec /usr/local/bin/su-exec
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --from=cartesi/toolchain:0.5.0 /usr/local/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Copy emulator, toolchain, buildroot and kernel
