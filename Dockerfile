@@ -27,6 +27,9 @@ ENV PATH="/opt/cartesi/bin:/opt/riscv/riscv64-cartesi-linux-gnu/bin:${PATH}"
 
 WORKDIR /opt/cartesi
 
+# Create user developer
+RUN adduser developer -u 499 --gecos ",,," --disabled-password
+
 # Setup su-exec
 COPY --from=cartesi/toolchain:0.5.0 /usr/local/bin/su-exec /usr/local/bin/su-exec
 COPY --from=cartesi/toolchain:0.5.0 /usr/local/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
