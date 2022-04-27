@@ -13,13 +13,15 @@
 #
 .PHONY: build run push
 
-TAG := cartesi/playground
+TAG ?= devel
+IMG_REPO ?= cartesi/playground
+IMG ?= $(IMG_REPO):$(TAG)
 
 build:
-	docker build -t $(TAG) .
+	docker build -t $(IMG) .
 
 push:
-	docker push $(TAG)
+	docker push $(IMG)
 
 run:
 	@docker run \
@@ -31,5 +33,16 @@ run:
 		 -it \
 		 -h playground \
 		 -w /home/$$(id -u -n) \
-		 --rm $(TAG) /bin/bash
+		 --rm $(IMG) /bin/bash
 
+exec:
+	docker exec \
+		 -e USER=$$(id -u -n) \
+		 -e GROUP=$$(id -g -n) \
+		 -e UID=$$(id -u) \
+		 -e GID=$$(id -g) \
+         -u $$(id -u):$$(id -g) \
+		 -it \
+		 -w /home/$$(id -u -n) \
+		$$(docker ps --filter "ancestor=$(IMG)" --format="{{.Names}}" | head -n 1) \
+		bash
