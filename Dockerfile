@@ -71,4 +71,7 @@ COPY --from=cartesi/rootfs:0.11.0 /opt/riscv/rootfs/artifacts/rootfs.ext2 /opt/c
 RUN \
     wget -O /opt/cartesi/share/images/rom.bin https://github.com/cartesi/machine-emulator-rom/releases/download/v0.10.0/rom.bin
 
+COPY lua-paths.lua /opt/cartesi/share/
+ENV LUA_INIT=@/opt/cartesi/share/lua-paths.lua
+
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
