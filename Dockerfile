@@ -10,7 +10,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-FROM ubuntu:20.04 as lua
+FROM ubuntu:22.04 as lua
 
 RUN apt-get update && \
     DEBIAN_FRONTEND="noninteractive" apt-get install --no-install-recommends -y \
@@ -24,12 +24,12 @@ RUN luarocks install luasocket && \
     luarocks install lpeg && \
     luarocks install dkjson
 
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
-    libboost-coroutine1.71.0 \
-    libboost-context1.71.0 \
-    libboost-filesystem1.71.0 \
+    libboost-coroutine1.74.0 \
+    libboost-context1.74.0 \
+    libboost-filesystem1.74.0 \
     libreadline8 \
     openssl \
     libc-ares2 \
@@ -38,6 +38,7 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     libgomp1 \
     lua5.3 \
     vim \
+    net-tools \
     wget \
     e2tools \
     gettext \
