@@ -44,6 +44,8 @@ RUN apt-get update && DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     gettext \
     genext2fs \
     jq \
+    file \
+    devio \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/opt/cartesi/bin:/opt/riscv/riscv64-cartesi-linux-gnu/bin:${PATH}"
@@ -54,8 +56,8 @@ WORKDIR /opt/cartesi
 RUN adduser developer -u 499 --gecos ",,," --disabled-password
 
 # Setup su-exec
-COPY --from=cartesi/toolchain:0.10.0 /usr/local/bin/su-exec /usr/local/bin/su-exec
-COPY --from=cartesi/toolchain:0.10.0 /usr/local/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --from=cartesi/toolchain:0.11.0 /usr/local/bin/su-exec /usr/local/bin/su-exec
+COPY --from=cartesi/toolchain:0.11.0 /usr/local/bin/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Copy Lua
@@ -63,12 +65,12 @@ COPY --from=lua /usr/local/lib/lua /usr/local/lib/lua
 COPY --from=lua /usr/local/share/lua /usr/local/share/lua
 
 # Copy emulator, toolchain, rootfs, kernel, and rom
-COPY --from=cartesi/machine-emulator:0.10.0 /opt/cartesi /opt/cartesi
-COPY --from=cartesi/toolchain:0.10.0 /opt/riscv /opt/riscv
-COPY --from=cartesi/linux-kernel:0.12.0 /opt/riscv/kernel/artifacts/linux-5.5.19-ctsi-5.bin /opt/cartesi/share/images/linux.bin
-COPY --from=cartesi/rootfs:0.12.0 /opt/riscv/rootfs/artifacts/rootfs.ext2 /opt/cartesi/share/images/
+COPY --from=cartesi/machine-emulator:0.11.0 /opt/cartesi /opt/cartesi
+COPY --from=cartesi/toolchain:0.11.0 /opt/riscv /opt/riscv
+COPY --from=cartesi/linux-kernel:0.13.0 /opt/riscv/kernel/artifacts/linux-5.5.19-ctsi-6.bin /opt/cartesi/share/images/linux.bin
+COPY --from=cartesi/rootfs:0.14.1 /opt/riscv/rootfs/artifacts/rootfs.ext2 /opt/cartesi/share/images/
 RUN \
-    wget -O /opt/cartesi/share/images/rom.bin https://github.com/cartesi/machine-emulator-rom/releases/download/v0.11.0/rom.bin
+    wget -O /opt/cartesi/share/images/rom.bin https://github.com/cartesi/machine-emulator-rom/releases/download/v0.12.0/rom.bin
 
 COPY lua-paths.lua /opt/cartesi/share/
 ENV LUA_INIT=@/opt/cartesi/share/lua-paths.lua

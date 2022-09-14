@@ -17,11 +17,21 @@ TAG ?= devel
 IMG_REPO ?= cartesi/playground
 IMG ?= $(IMG_REPO):$(TAG)
 
+CONTAINER_BASE := /opt/cartesi/playground
+
 build:
 	docker build -t $(IMG) .
 
 push:
 	docker push $(IMG)
+
+run-as-root:
+	docker run \
+		 -v `pwd`:/$(CONTAINER_BASE) \
+		 -it \
+		 -h playground \
+		 -w $(CONTAINER_BASE) \
+		 --rm $(IMG) /bin/bash
 
 run:
 	@docker run \
