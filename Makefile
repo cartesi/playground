@@ -26,7 +26,7 @@ push:
 	docker push $(IMG)
 
 run-as-root:
-	docker run \
+	@docker run \
 		 -v `pwd`:/$(CONTAINER_BASE) \
 		 -it \
 		 -h playground \
@@ -46,7 +46,7 @@ run:
 		 --rm $(IMG) /bin/bash
 
 exec:
-	docker exec \
+	@docker exec \
 		 -e USER=$$(id -u -n) \
 		 -e GROUP=$$(id -g -n) \
 		 -e UID=$$(id -u) \
@@ -54,5 +54,11 @@ exec:
          -u $$(id -u):$$(id -g) \
 		 -it \
 		 -w /home/$$(id -u -n) \
+		$$(docker ps --filter "ancestor=$(IMG)" --format="{{.Names}}" | head -n 1) \
+		bash
+
+exec-as-root:
+	@docker exec \
+		 -it \
 		$$(docker ps --filter "ancestor=$(IMG)" --format="{{.Names}}" | head -n 1) \
 		bash

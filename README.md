@@ -31,6 +31,9 @@ The following options are available as `make` targets:
 
 - **build**: builds the docker playground image
 - **run**: runs the generated image with current user UID and GID
+- **run-as-root**: runs the generated image as root
+- **exec**: starts a new interactive shell in running container
+- **exec-as-root**: starts a new interactive shell as root running container
 - **push**: pushes the image to the registry repository
 
 #### Makefile container options
