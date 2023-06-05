@@ -1,5 +1,3 @@
-> :warning: The Cartesi team keeps working internally on the next version of this repository, following its regular development roadmap. Whenever there's a new version ready or important fix, these are published to the public source tree as new releases.
-
 # Cartesi Machine Playground
 
 The Cartesi Machine Playground is the repository that provides the Dockefile to build the `cartesi/playground` image. This image is base on Ubuntu 20.04 and comes with a pre-built emulator and Lua interpreter accessible within the command-line, as well as a pre-built ROM image, RAM image, and root file-system. It also comes with the cross-compiler for the RISC-V architecture on which the Cartesi Machine is based. For more information, please refer to the [documentation](https://cartesi.io/en/docs/machine/host/overview/).
@@ -76,4 +74,3 @@ Please note we have a [Code of Conduct](CODE_OF_CONDUCT.md), please follow it in
 
 The playground repository and all contributions are licensed under
 [APACHE 2.0](https://www.apache.org/licenses/LICENSE-2.0). Please review our [LICENSE](LICENSE) file.
-
