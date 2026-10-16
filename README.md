@@ -1,5 +1,11 @@
 # Cartesi Machine Playground
 
+> [!WARNING]
+> **This repository is no longer maintained.**
+> To try the Cartesi Machine, install the emulator as described in [cartesi/machine-emulator](https://github.com/cartesi/machine-emulator#installation).
+> The `cartesi/playground` image remains available on Docker Hub for older projects.
+> Do not use this repository for new development.
+
 The Cartesi Machine Playground is the repository that provides the Dockefile to build the `cartesi/playground` image. This image is base on Ubuntu 20.04 and comes with a pre-built emulator and Lua interpreter accessible within the command-line, as well as a pre-built ROM image, RAM image, and root file-system. It also comes with the cross-compiler for the RISC-V architecture on which the Cartesi Machine is based. For more information, please refer to the [documentation](https://cartesi.io/en/docs/machine/host/overview/).
 
 ## Getting Started
